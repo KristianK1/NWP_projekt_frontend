@@ -6,7 +6,7 @@ import { IAddEmailRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByT
   providedIn: 'root'
 })
 export class OnlineService {
-  backendLink = "localhost:8001";
+  backendLink = "http://localhost:8001";
   mainAPIrouter = "/API";
   userAuthRouter = "/userAuth";
 

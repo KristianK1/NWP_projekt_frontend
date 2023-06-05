@@ -18,7 +18,9 @@ export class UserService {
 
   async loginByToken() {
     let token = this.storageService.getAuthToken();
-    await this.onlineService.loginByToken(token);
+    if(token){
+      await this.onlineService.loginByToken(token);
+    }
   }
 
   async loginByCreds(username: string, password: string) {
@@ -43,4 +45,8 @@ export class UserService {
     await this.onlineService.addEmail(this.myself.token, email);
   }
 
+  forgotPassword(){
+    let backendLink = this.onlineService.backendLink;
+    window.open(`${backendLink}/email/forgotPassword`);
+  }
 }
