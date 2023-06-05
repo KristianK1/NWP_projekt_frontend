@@ -6,9 +6,17 @@ import { AppComponent } from './app.component';
 import { AngularWebStorageModule } from 'angular-web-storage';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { MainComponent } from './pages/main/main.component';
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    MainComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
