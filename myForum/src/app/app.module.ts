@@ -14,9 +14,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { TopicComponent } from './pages/topic/topic.component';
 import { AddTopicComponent } from './pages/add-topic/add-topic.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoute: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'main', component: MainComponent },
@@ -37,6 +38,7 @@ const appRoute: Routes = [
     AddTopicComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

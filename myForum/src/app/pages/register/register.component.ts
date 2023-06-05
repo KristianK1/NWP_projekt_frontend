@@ -9,12 +9,24 @@ import { UserService } from 'app/services/userService/user.service';
 })
 export class RegisterComponent implements OnInit {
 
+  username = "";
+  password ="";
+  passwordAgain = "";
+  email = "";
+
   constructor(
     private _router: Router,
     private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+  }
+
+  register(){
+    if(this.password!=this.passwordAgain){
+      return;
+    }
+    this.userService.register(this.username, this.email, this.password);
   }
 
   navigateToLogin(){

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAddEmailRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
+import { IAddEmailRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +14,23 @@ export class OnlineService {
     private https: HttpClient,
   ) { }
 
-  async loginByToken(token: string) {
+  async loginByToken(token: string): Promise<ILoginResponse> {
     let link = `${this.backendLink}${this.mainAPIrouter}${this.userAuthRouter}/login/token`;
     let body: ILoginByTokenRequest = {
       authToken: token
     }
-    let result = await this.https.post(link, body).toPromise();
+    let result: ILoginResponse = await this.https.post(link, body).toPromise() as ILoginResponse;
+    return result;
   }
 
-  async loginByCreds(username: string, password: string) {
+  async loginByCreds(username: string, password: string): Promise<ILoginResponse> {
     let link = `${this.backendLink}${this.mainAPIrouter}${this.userAuthRouter}/login/creds`;
     let body: ILoginRequest = {
       username: username,
       password: password,
     }
-    let result = await this.https.post(link, body).toPromise();
+    let result: ILoginResponse = await this.https.post(link, body).toPromise() as ILoginResponse;
+    return result;
   }
 
   async logout(token: string, allSessions: boolean) {
@@ -70,7 +72,7 @@ export class OnlineService {
     let result = await this.https.post(link, body).toPromise();
   }
 
-  async addEmail(token: string, email: string){
+  async addEmail(token: string, email: string) {
     let link = `${this.backendLink}${this.mainAPIrouter}${this.userAuthRouter}/addEmail`;
     let body: IAddEmailRequest = {
       authToken: token,

@@ -1,1 +1,9 @@
-<p>main works!</p>
+<Button *ngIf="!loggedIn" (click)="navigateToLogin()">
+    Login page
+</Button>
+
+<Button *ngIf="loggedIn" (click)="logout()">Logout</Button>
+
+<Button *ngIf="loggedIn" (click)="navigateToUserSettings()">User settings</Button>
+
+<Button *ngIf="loggedIn" (click)="navigateToAddNewTopic()">Add new topic</Button>

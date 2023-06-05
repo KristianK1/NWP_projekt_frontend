@@ -20,15 +20,17 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loginByToken();
   }
 
-  loginByToken() {
-    this.userService.loginByToken();
+  async loginByCreds() {    
+    let loginSuccesfull = await this.userService.loginByCreds(this.username, this.password);
+    if(loginSuccesfull){
+      this.navigateToMainScreen();
+    }
   }
 
-  loginByCreds() {
-    this.userService.loginByCreds(this.username, this.password);
+  navigateToMainScreen(){
+    this._router.navigate(['main']);
   }
 
   navigateToRegister(){

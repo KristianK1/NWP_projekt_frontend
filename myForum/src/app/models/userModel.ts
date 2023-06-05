@@ -7,4 +7,5 @@ export interface IMyself {
     userId: number,
     token: string,
     username: string,
+    email: string,
 }
