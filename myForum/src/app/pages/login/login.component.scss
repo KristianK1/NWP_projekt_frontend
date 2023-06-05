@@ -46,3 +46,27 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+
+.forgot-password span {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s, text-decoration 0.3s;
+    cursor: pointer;
+}
+
+.forgot-password span:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.register-instead span {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s, text-decoration 0.3s;
+    cursor: pointer;
+}
+
+.register-instead span:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

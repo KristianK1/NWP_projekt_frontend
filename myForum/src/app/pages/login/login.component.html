@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myForum - Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 
@@ -11,7 +12,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 login-container">
-                <h2>myForum</h2>
+                <h2>myForum - Login</h2>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter username">
@@ -22,10 +23,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <div class="forgot-password">
-                    <a href="#">Forgot Password?</a>
+                    <span (click)="forgotPassword()">Forgot Password?</span>
                 </div>
                 <div class="register-instead">
-                    <a href="#">Register instead</a>
+                    <span (click)="navigateToRegister()">Register instead</span>
                 </div>
             </div>
         </div>
