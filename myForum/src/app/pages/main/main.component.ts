@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
     private userService: UserService,
   ) {
     this.userService.myself.subscribe((value) => {
+      console.log("eeeeeee" + value)
       this.loggedIn = !!value;
     });
 
@@ -32,8 +33,7 @@ export class MainComponent implements OnInit {
   async ngOnInit() {
     this.loginByToken();
     this.categories = await this.forumDataService.getCategories(false);
-    this.selectedCategory = this.categories[0].id;
-    console.log("sel cat: " +this.selectedCategory);
+    this.selectCategory(this.categories[0].id);
   }
 
   async loginByToken() {
@@ -64,7 +64,8 @@ export class MainComponent implements OnInit {
 
   async selectTopic(topicId: number){
     console.log("click topic: " + topicId);
-    
+    this._router.navigate(["topic"]);
+    this.forumDataService.selectTopic(this.selectedCategory, topicId);
   }
 
 }

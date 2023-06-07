@@ -49,5 +49,9 @@ export class ForumDataService {
 
   }
 
+  async selectTopic(categoryId: number, topicId: number){
+    
+  }
+
 
 }

@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  myself: BehaviorSubject<IMyself> = new BehaviorSubject<IMyself>(null!);
+  myself: BehaviorSubject<IMyself | null> = new BehaviorSubject<IMyself | null>(null);
 
   constructor(
     private storageService: StorageService,
@@ -61,12 +61,12 @@ export class UserService {
   }
 
   async changePassword(oldP: string, newP: string, logoutOther: boolean) {
-    if (!this.myself) return;
+    if (!this.myself.value) return;
     await this.onlineService.changePassword(this.myself.value.userId, oldP, newP, logoutOther, this.myself.value.token);
   }
 
   async addEmail(email: string) {
-    if (!this.myself) return;
+    if (!this.myself.value) return;
     await this.onlineService.addEmail(this.myself.value.token, email);
   }
 

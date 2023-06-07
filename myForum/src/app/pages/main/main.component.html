@@ -32,10 +32,11 @@
           <li *ngFor="let cat of categories" [ngClass]="{'active': cat.id === selectedCategory}" (click)="selectCategory(cat.id)"><a>{{cat.title}}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li><a><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
-          <li><a><span class="glyphicon glyphicon-plus-sign"></span> Add topic</a></li>
+          <li *ngIf="loggedIn"><a><span class="glyphicon glyphicon-log-in" (click)="logout()"></span> Logout</a></li>
+          <li *ngIf="loggedIn"><a><span class="glyphicon glyphicon-wrench" (click)="navigateToUserSettings()"></span> User settings</a></li>
+          <li *ngIf="loggedIn"><a><span class="glyphicon glyphicon-plus-sign" (click)="navigateToAddNewTopic()"></span> Add topic</a></li>
+          <li *ngIf="!loggedIn"><a><span class="glyphicon glyphicon-log-in" (click)="navigateToLogin()"></span> Login</a></li>
+        
         </ul>
       </div>
     </div>
