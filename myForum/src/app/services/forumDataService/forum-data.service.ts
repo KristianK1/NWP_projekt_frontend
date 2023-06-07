@@ -1,25 +1,51 @@
 import { Injectable } from '@angular/core';
+import { StorageService } from '../storageService/storage.service';
+import { OnlineService } from '../onlineService/online.service';
+import { IAddTopicRequest } from 'app/models/backendRequests';
+import { ICategory } from 'app/models/forumModels';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForumDataService {
 
-  constructor() { }
+  categories: ICategory[] = [];
 
-  async addTopic(title: string, desc: string){
+  constructor(
+    private storageService: StorageService,
+    private onlineService: OnlineService,
+  ) { }
+
+  async getCategories(forceOnline: boolean): Promise<ICategory[]> {
+    if (forceOnline || !this.categories || this.categories.length == 0) {
+      try {
+        this.categories = await this.onlineService.getCategories();
+        return this.categories;
+      } catch { }
+    }
+
+    return this.categories;
+  }
+
+  async addTopic(categoryId: number, title: string, desc: string) {
+    try {
+      await this.onlineService.addTopic(this.storageService.getAuthToken(), categoryId, title, desc);
+    } catch { }
+  }
+
+  async getTopics(categoryId: number) {
+    try {
+      return await this.onlineService.getTopics(categoryId);
+    } catch {
+      return [];
+    }
+  }
+
+  async addComment(categoryId: number, topicId: number, text: string) {
 
   }
 
-  async getTopics(categoryId: number){
-
-  }
-
-  async addComment(categoryId: number, topicId: number, text: string){
-
-  }
-
-  async getComments(categoryId: number, topicId: number){
+  async getComments(categoryId: number, topicId: number) {
 
   }
 

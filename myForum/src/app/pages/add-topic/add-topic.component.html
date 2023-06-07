@@ -10,14 +10,26 @@
 <body>
     <div class="container">
         <h2>Add New Topic</h2>
+        <span>
+            <div class="dropdown">
+                Select category:
+                <select [(ngModel)]="selectedCategory">
+                    <option *ngFor="let cat of categories; index as i;" (click)="selectCategory()" [value]="i">
+                        {{cat.title}}
+                    </option>
+                </select>
+            </div>
+        </span>
+        <br>
+        <br>
         <div>
             <div class="form-group">
-                <label for="topic-title">Title</label>
-                <input type="text" id="topic-title" name="topic-title" required>
+                <label >Title</label>
+                <input type="text" id="topic-title"  [(ngModel)]="title">
             </div>
             <div class="form-group">
-                <label for="topic-comment">Comment</label>
-                <textarea id="topic-comment" name="topic-comment" rows="5" required></textarea>
+                <label>Comment</label>
+                <textarea id="topic-comment" rows="5" [(ngModel)]="desc"></textarea>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" (click)="addTopic()">

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAddEmailRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
+import { IAddEmailRequest, IAddTopicRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
+import { ICategory, ITopic } from 'app/models/forumModels';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class OnlineService {
   backendLink = "http://localhost:8001";
   mainAPIrouter = "/API";
   userAuthRouter = "/userAuth";
+  forumDataRouter = "/forumData";
 
   constructor(
     private https: HttpClient,
@@ -79,5 +81,30 @@ export class OnlineService {
       email: email,
     }
     let result = await this.https.post(link, body).toPromise();
+  }
+
+
+
+  async addTopic(token: string, categoryId: number, title: string, text: string) {
+    let request: IAddTopicRequest = {
+      authToken: token,
+      categoryId: categoryId,
+      title: title,
+      text: text,
+    };
+
+    let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/addTopic`;
+    console.log(link);
+    let result = await this.https.post(link, request).toPromise();
+  }
+
+  async getCategories(){
+    let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/categories`;
+    return await this.https.get(link).toPromise() as ICategory[];
+  }
+
+  async getTopics(categoryId: number){
+    let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/topics/${categoryId}`;
+    return await this.https.get(link).toPromise() as ITopic[];
   }
 }
