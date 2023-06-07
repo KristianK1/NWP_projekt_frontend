@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAddEmailRequest, IAddTopicRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
-import { ICategory, ITopic } from 'app/models/forumModels';
+import { ICategory, IComment, ITopic } from 'app/models/forumModels';
 
 @Injectable({
   providedIn: 'root'
@@ -106,5 +106,10 @@ export class OnlineService {
   async getTopics(categoryId: number){
     let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/topics/${categoryId}`;
     return await this.https.get(link).toPromise() as ITopic[];
+  }
+
+  async getComments(categoryId: number, topicId: number){
+    let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/comments/${categoryId}/${topicId}`;
+    return await this.https.get(link).toPromise() as IComment[];
   }
 }

@@ -14,3 +14,11 @@ export interface ITopic {
     maxCommentId: number,
     // comments: IComment[] | undefined,
 }
+
+
+export interface IComment {
+    id: number,
+    username: string,
+    userId: number,
+    text: string,
+}

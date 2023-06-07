@@ -64,8 +64,7 @@ export class MainComponent implements OnInit {
 
   async selectTopic(topicId: number){
     console.log("click topic: " + topicId);
-    this._router.navigate(["topic"]);
-    this.forumDataService.selectTopic(this.selectedCategory, topicId);
+    this._router.navigate(["topic"], { queryParams: { category: this.selectedCategory, topic: topicId }});
   }
 
 }

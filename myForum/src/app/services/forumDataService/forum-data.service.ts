@@ -11,6 +11,9 @@ export class ForumDataService {
 
   categories: ICategory[] = [];
 
+  selectedCategory: number = -1;
+  selectedTopic: number = -1;
+
   constructor(
     private storageService: StorageService,
     private onlineService: OnlineService,
@@ -33,7 +36,7 @@ export class ForumDataService {
     } catch { }
   }
 
-  async getTopics(categoryId: number) :Promise<ITopic[]> {
+  async getTopics(categoryId: number): Promise<ITopic[]> {
     try {
       return await this.onlineService.getTopics(categoryId);
     } catch {
@@ -46,12 +49,11 @@ export class ForumDataService {
   }
 
   async getComments(categoryId: number, topicId: number) {
-
+    try {
+      return await this.onlineService.getComments(categoryId, topicId);
+    } catch {
+      return [];
+    }
   }
-
-  async selectTopic(categoryId: number, topicId: number){
-    
-  }
-
 
 }
