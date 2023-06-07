@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IComment } from 'app/models/forumModels';
 import { ForumDataService } from 'app/services/forumDataService/forum-data.service';
+import { UserService } from 'app/services/userService/user.service';
 
 @Component({
   selector: 'app-topic',
@@ -10,15 +11,24 @@ import { ForumDataService } from 'app/services/forumDataService/forum-data.servi
 })
 export class TopicComponent implements OnInit, OnDestroy {
 
+  loggedIn = false;
+
   private catId: number = -1;
   private topicId: number = -1;
 
   comments: IComment[] = [];
 
   constructor(
+    private _router: Router,
     private route: ActivatedRoute,
     private forumDataService: ForumDataService,
-    ) { }
+    private userService: UserService,
+    ) {
+      this.userService.myself.subscribe((value) => {
+        console.log("eeeeeee" + value)
+        this.loggedIn = !!value;
+      });
+    }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(async (value) => {
@@ -32,7 +42,23 @@ export class TopicComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.comments = [];
-
   }
+
+  navigateToLogin() {
+    this._router.navigate(['login']);
+  }
+
+  logout() {
+    this.userService.logout(false);
+  }
+
+  navigateToUserSettings(){
+    this._router.navigate(["user"]);
+  }
+
+  navigateToAddNewTopic(){
+    this._router.navigate(["addTopic"]);
+  }
+
 
 }

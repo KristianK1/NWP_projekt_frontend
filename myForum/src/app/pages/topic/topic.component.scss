@@ -1,0 +1,63 @@
+.navbar{
+    margin: 0 5% 0 5%; 
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.logo{
+    height:213px;
+    width:288px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.headerimage {
+    margin: 1.5% 5% 0 5%; 
+    position: relative;
+    height:300px;
+    border-left: 1px solid rgb(196, 196, 196); 
+    border-bottom: 1px solid rgb(196, 196, 196); 
+    border-right: 1px solid rgb(196, 196, 196); 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-image: url("../../../assets/headertest.png");
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+/* footer css */
+.footerfluid {
+    margin-top: 20px !important;
+    margin-bottom:20px !important; 
+    background-image: url("../../../assets/footer_background.png");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */  margin: 0 5% 0 5%; 
+    padding-top:7px; 
+    padding-bottom:7px;
+    border: 1px solid rgb(196, 196, 196); 
+}
+/* main area css */
+.legend {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin: 1% 5% 0 5%;
+  border: 1px solid gray;
+  background-color: #333; 
+}
+.themeslist{
+  margin: 0 5% 0 5%;
+  background-color: gainsboro;
+  padding:5px;
+  border-bottom:1px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
+
+
+.hline{
+    border: 1px solid gray;
+    margin: 0 10% 0 10%;
+}
