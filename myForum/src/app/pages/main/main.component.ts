@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ICategory, ITopic } from 'app/models/forumModels';
+import { ForumDataService } from 'app/services/forumDataService/forum-data.service';
 import { UserService } from 'app/services/userService/user.service';
 
 @Component({
@@ -11,8 +13,14 @@ export class MainComponent implements OnInit {
 
   loggedIn = false;
 
+  categories: ICategory[] = [];
+  selectedCategory = 0;
+
+  topics: ITopic[] = [];
+
   constructor(
     private _router: Router,
+    private forumDataService: ForumDataService,
     private userService: UserService,
   ) {
     this.userService.myself.subscribe((value) => {
@@ -21,8 +29,11 @@ export class MainComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.loginByToken()
+  async ngOnInit() {
+    this.loginByToken();
+    this.categories = await this.forumDataService.getCategories(false);
+    this.selectedCategory = this.categories[0].id;
+    console.log("sel cat: " +this.selectedCategory);
   }
 
   async loginByToken() {
@@ -43,6 +54,17 @@ export class MainComponent implements OnInit {
 
   navigateToAddNewTopic(){
     this._router.navigate(["addTopic"]);
+  }
+
+  async selectCategory(catId: number){
+    console.log(catId);
+    this.selectedCategory = catId;
+    this.topics = await this.forumDataService.getTopics(catId);
+  }
+
+  async selectTopic(topicId: number){
+    console.log("click topic: " + topicId);
+    
   }
 
 }

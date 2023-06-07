@@ -48,7 +48,6 @@ export class AddTopicComponent implements OnInit {
   }
 
   selectCategory() {
-    console.log("jebote isus");
   }
 
 }

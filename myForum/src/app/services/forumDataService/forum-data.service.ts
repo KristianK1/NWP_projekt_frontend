@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../storageService/storage.service';
 import { OnlineService } from '../onlineService/online.service';
 import { IAddTopicRequest } from 'app/models/backendRequests';
-import { ICategory } from 'app/models/forumModels';
+import { ICategory, ITopic } from 'app/models/forumModels';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class ForumDataService {
     } catch { }
   }
 
-  async getTopics(categoryId: number) {
+  async getTopics(categoryId: number) :Promise<ITopic[]> {
     try {
       return await this.onlineService.getTopics(categoryId);
     } catch {

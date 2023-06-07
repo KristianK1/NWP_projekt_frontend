@@ -29,16 +29,13 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Category 1</a></li>
-          <li><a href="#">Category 2</a></li>
-          <li><a href="#">Category 3</a></li>
-          <li><a href="#">Category 4</a></li>
+          <li *ngFor="let cat of categories" [ngClass]="{'active': cat.id === selectedCategory}" (click)="selectCategory(cat.id)"><a>{{cat.title}}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-plus-sign"></span> Add topic</a></li>
+          <li><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+          <li><a><span class="glyphicon glyphicon-plus-sign"></span> Add topic</a></li>
         </ul>
       </div>
     </div>
@@ -57,37 +54,15 @@
     </div>
   </div>
   <!-- main area list items -->
-  <div class="container-fluid themeslist text-center">
+  <div *ngFor="let topic of topics" (click)="selectTopic(topic.id)" class="container-fluid themeslist text-center">
     <div class="col-sm-4" style="padding-top:10px;">
-      <span class="themename">Neki naziv teme </span>
+      <span class="themename">{{topic.title}}</span>
     </div>
     <div class="col-sm-4" style="padding-top:10px;">
-      <span class="authorname">Neki autor</span>
+      <span class="authorname">{{topic.username}}</span>
     </div>
     <div class="col-sm-4" style="padding-top:10px;">
-      <span class="authorname">Neki datum</span>
-    </div>
-  </div>
-  <div class="container-fluid themeslist text-center">
-    <div class="col-sm-4" style="padding-top:10px;">
-      <span class="themename">Neki naziv teme </span>
-    </div>
-    <div class="col-sm-4" style="padding-top:10px;">
-      <span class="authorname">Neki autor</span>
-    </div>
-    <div class="col-sm-4" style="padding-top:10px;">
-      <span class="authorname">Neki datum</span>
-    </div>
-  </div>
-  <div class="container-fluid themeslist text-center">
-    <div class="col-sm-4" style="padding-top:10px;">
-      <span class="themename">Neki naziv teme </span>
-    </div>
-    <div class="col-sm-4" style="padding-top:10px;">
-      <span class="authorname">Neki autor</span>
-    </div>
-    <div class="col-sm-4" style="padding-top:10px;">
-      <span class="authorname">Neki datum</span>
+      <span class="authorname">{{topic.timestamp}}</span>
     </div>
   </div>
   <!-- footer area -->
