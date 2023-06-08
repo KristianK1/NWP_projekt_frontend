@@ -1,1 +1,26 @@
-<p>user-settings works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 login-container">
+                <h2>myForum - User settings</h2>
+                
+                <button type="submit" class="btn btn-primary" (click)="logout()">Logout</button>
+                <button type="submit" class="btn btn-primary" (click)="logoutAllSessions()">Logout of all sessions</button>
+                <button type="submit" class="btn btn-primary" (click)="chPass()">Change password</button>
+                <button type="submit" class="btn btn-primary" (click)="deleteUserAccount()">Delete user account</button>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -8,6 +8,7 @@ import { ICategory, IComment, ITopic } from 'app/models/forumModels';
 })
 export class OnlineService {
   backendLink = "http://localhost:8001";
+  // backendLink = "https://myforum-pv1g.onrender.com";
   mainAPIrouter = "/API";
   userAuthRouter = "/userAuth";
   forumDataRouter = "/forumData";

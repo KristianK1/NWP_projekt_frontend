@@ -50,7 +50,6 @@ export class UserService {
     try {
       await this.onlineService.logout(this.storageService.getAuthToken(), logoutOtherSessions);
     } catch (e) {
-
     }
     this.myself.next(null!);
     this.storageService.removeAuthToken();
@@ -63,7 +62,12 @@ export class UserService {
 
   async changePassword(oldP: string, newP: string, logoutOther: boolean) {
     if (!this.myself.value) return;
-    await this.onlineService.changePassword(this.myself.value.userId, oldP, newP, logoutOther, this.myself.value.token);
+    try{
+      await this.onlineService.changePassword(this.myself.value.userId, oldP, newP, logoutOther, this.myself.value.token);
+      return true;
+    }catch{
+      return false;
+    }
   }
 
   async addEmail(email: string) {
@@ -74,6 +78,10 @@ export class UserService {
   forgotPassword() {
     let backendLink = this.onlineService.backendLink;
     window.open(`${backendLink}/email/forgotPassword`);
+  }
+
+  async deleteUserAccount(){
+    await this.onlineService.deleteUser(this.storageService.getAuthToken());
   }
 
   completeLogin(loginResponse: ILoginResponse) {
