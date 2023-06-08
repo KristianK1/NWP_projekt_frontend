@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from '../storageService/storage.service';
 import { OnlineService } from '../onlineService/online.service';
-import { IAddTopicRequest } from 'app/models/backendRequests';
 import { ICategory, ITopic } from 'app/models/forumModels';
 
 @Injectable({
@@ -13,6 +12,8 @@ export class ForumDataService {
 
   selectedCategory: number = -1;
   selectedTopic: number = -1;
+
+  localTopicsbyCategories:any = [];
 
   constructor(
     private storageService: StorageService,
@@ -26,7 +27,6 @@ export class ForumDataService {
         return this.categories;
       } catch { }
     }
-
     return this.categories;
   }
 
@@ -38,7 +38,9 @@ export class ForumDataService {
 
   async getTopics(categoryId: number): Promise<ITopic[]> {
     try {
-      return await this.onlineService.getTopics(categoryId);
+      let topics = await this.onlineService.getTopics(categoryId);
+      this.localTopicsbyCategories[categoryId] = topics;
+      return topics;
     } catch {
       return [];
     }
@@ -54,6 +56,22 @@ export class ForumDataService {
     } catch {
       return [];
     }
+  }
+
+  getLocalTopic(catId: number, topicId: number) {
+    let topics = this.localTopicsbyCategories[catId] as ITopic[];
+    if(!topics) return undefined;
+    let topic = topics.find(o => o.id == topicId);
+    return topic;
+  }
+
+  getLocalCategory(catId: number){
+    let topics = this.localTopicsbyCategories[catId] as ITopic[];
+    return topics;
+  }
+
+  async getSingleTopic(catId: number, topicId: number): Promise<ITopic>{
+    return await this.onlineService.getSingleTopic(catId, topicId);
   }
 
 }

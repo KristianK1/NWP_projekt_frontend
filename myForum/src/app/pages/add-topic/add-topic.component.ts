@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICategory } from 'app/models/forumModels';
 import { ForumDataService } from 'app/services/forumDataService/forum-data.service';
 
@@ -17,6 +18,7 @@ export class AddTopicComponent implements OnInit {
   desc = "";
 
   constructor(
+    private _router: Router,
     private forumDataService: ForumDataService,
   ) {
 
@@ -43,8 +45,10 @@ export class AddTopicComponent implements OnInit {
     if (this.desc.length > 500) { 
       return;
     }
-    console.log("OVDJE")
     await this.forumDataService.addTopic(cat.id, this.title, this.desc);
+    await this.forumDataService.getCategories(true);
+    this._router.navigate(["main"]);
+    
   }
 
   selectCategory() {

@@ -83,8 +83,6 @@ export class OnlineService {
     let result = await this.https.post(link, body).toPromise();
   }
 
-
-
   async addTopic(token: string, categoryId: number, title: string, text: string) {
     let request: IAddTopicRequest = {
       authToken: token,
@@ -111,5 +109,10 @@ export class OnlineService {
   async getComments(categoryId: number, topicId: number){
     let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/comments/${categoryId}/${topicId}`;
     return await this.https.get(link).toPromise() as IComment[];
+  }
+
+  async getSingleTopic(catId: number, topicId: number): Promise<ITopic>{
+    let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/topic/${catId}/${topicId}`;
+    return await this.https.get(link).toPromise() as ITopic;
   }
 }

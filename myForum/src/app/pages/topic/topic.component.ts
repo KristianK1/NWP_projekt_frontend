@@ -17,6 +17,8 @@ export class TopicComponent implements OnInit, OnDestroy {
   private topicId: number = -1;
 
   comments: IComment[] = [];
+  topicText: string = "";
+  topicTitle: string = "";
 
   constructor(
     private _router: Router,
@@ -36,7 +38,14 @@ export class TopicComponent implements OnInit, OnDestroy {
       this.topicId = value["topic"];
       
       this.comments = await this.forumDataService.getComments(this.catId, this.topicId);
-      console.log(this.comments)
+
+      let topicData = this.forumDataService.getLocalTopic(this.catId, this.topicId);
+      if(!topicData) {
+        topicData = await this.forumDataService.getSingleTopic(this.catId, this.topicId);
+      };
+      this.topicText = topicData.text;
+      this.topicTitle = topicData.title; 
+
     })
   }
 
@@ -59,6 +68,4 @@ export class TopicComponent implements OnInit, OnDestroy {
   navigateToAddNewTopic(){
     this._router.navigate(["addTopic"]);
   }
-
-
 }

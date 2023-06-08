@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
+  
   myself: BehaviorSubject<IMyself | null> = new BehaviorSubject<IMyself | null>(null);
 
   constructor(

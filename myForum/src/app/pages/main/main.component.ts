@@ -53,6 +53,8 @@ export class MainComponent implements OnInit {
   }
 
   navigateToAddNewTopic(){
+    console.log("navigate to new topic");
+    
     this._router.navigate(["addTopic"]);
   }
 
