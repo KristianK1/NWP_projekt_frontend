@@ -52,7 +52,8 @@ export class OnlineService {
       password: password,
       email: email,
     }
-    let result = await this.https.post(link, body).toPromise();
+    let result: ILoginResponse = await this.https.post(link, body).toPromise() as ILoginResponse;
+    return result;
   }
 
   async changePassword(userId: number, oldPassword: string, newPassword: string, logoutOther: boolean, dontlogoutToken: string) {

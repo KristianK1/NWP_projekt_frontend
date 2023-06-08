@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  
+
   myself: BehaviorSubject<IMyself | null> = new BehaviorSubject<IMyself | null>(null);
 
   constructor(
@@ -57,15 +57,22 @@ export class UserService {
 
   async register(username: string, email: string, password: string) {
     if (password.length < 5) return;
-    await this.onlineService.register(username, email, password);
+    try {
+      let response = await this.onlineService.register(username, email, password);
+      this.completeLogin(response);
+      return true;
+    } catch {
+
+    }
+    return false;
   }
 
   async changePassword(oldP: string, newP: string, logoutOther: boolean) {
     if (!this.myself.value) return;
-    try{
+    try {
       await this.onlineService.changePassword(this.myself.value.userId, oldP, newP, logoutOther, this.myself.value.token);
       return true;
-    }catch{
+    } catch {
       return false;
     }
   }
@@ -80,7 +87,7 @@ export class UserService {
     window.open(`${backendLink}/email/forgotPassword`);
   }
 
-  async deleteUserAccount(){
+  async deleteUserAccount() {
     await this.onlineService.deleteUser(this.storageService.getAuthToken());
   }
 

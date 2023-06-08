@@ -22,14 +22,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(){
-    if(this.password!=this.passwordAgain){
+  async register(){
+    if(this.password!==this.passwordAgain){
       return;
     }
-    this.userService.register(this.username, this.email, this.password);
+    let loginSuccesful = await this.userService.register(this.username, this.email, this.password);
+    if(loginSuccesful){
+      this.navigateToMainScreen();
+    }
   }
 
   navigateToLogin(){
     this._router.navigate(['login']);
+  }
+
+  navigateToMainScreen(){
+    this._router.navigate(['main']);
   }
 }
