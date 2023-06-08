@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAddEmailRequest, IAddTopicRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
+import { IAddCommentRequest, IAddEmailRequest, IAddTopicRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
 import { ICategory, IComment, ITopic } from 'app/models/forumModels';
 
 @Injectable({
@@ -96,23 +96,34 @@ export class OnlineService {
     let result = await this.https.post(link, request).toPromise();
   }
 
-  async getCategories(){
+  async getCategories() {
     let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/categories`;
     return await this.https.get(link).toPromise() as ICategory[];
   }
 
-  async getTopics(categoryId: number){
+  async getTopics(categoryId: number) {
     let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/topics/${categoryId}`;
     return await this.https.get(link).toPromise() as ITopic[];
   }
 
-  async getComments(categoryId: number, topicId: number){
+  async getComments(categoryId: number, topicId: number) {
     let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/comments/${categoryId}/${topicId}`;
     return await this.https.get(link).toPromise() as IComment[];
   }
 
-  async getSingleTopic(catId: number, topicId: number): Promise<ITopic>{
+  async getSingleTopic(catId: number, topicId: number): Promise<ITopic> {
     let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/topic/${catId}/${topicId}`;
     return await this.https.get(link).toPromise() as ITopic;
+  }
+
+  async addComment(token: string, categoryId: number, topicId: number, comment: string) {
+    let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}/addComment`;
+    let request: IAddCommentRequest = {
+      authToken: token,
+      categoryId: categoryId,
+      topicId: topicId,
+      text: comment,
+    };
+    return await this.https.post(link, request).toPromise() as ITopic;
   }
 }

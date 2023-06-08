@@ -20,31 +20,33 @@ export class TopicComponent implements OnInit, OnDestroy {
   topicText: string = "";
   topicTitle: string = "";
 
+  commentText: string = "";
+
   constructor(
     private _router: Router,
     private route: ActivatedRoute,
     private forumDataService: ForumDataService,
     private userService: UserService,
-    ) {
-      this.userService.myself.subscribe((value) => {
-        console.log("eeeeeee" + value)
-        this.loggedIn = !!value;
-      });
-    }
+  ) {
+    this.userService.myself.subscribe((value) => {
+      console.log("eeeeeee" + value)
+      this.loggedIn = !!value;
+    });
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(async (value) => {
       this.catId = value["category"];
       this.topicId = value["topic"];
-      
+
       this.comments = await this.forumDataService.getComments(this.catId, this.topicId);
 
       let topicData = this.forumDataService.getLocalTopic(this.catId, this.topicId);
-      if(!topicData) {
+      if (!topicData) {
         topicData = await this.forumDataService.getSingleTopic(this.catId, this.topicId);
       };
       this.topicText = topicData.text;
-      this.topicTitle = topicData.title; 
+      this.topicTitle = topicData.title;
 
     })
   }
@@ -61,11 +63,18 @@ export class TopicComponent implements OnInit, OnDestroy {
     this.userService.logout(false);
   }
 
-  navigateToUserSettings(){
+  navigateToUserSettings() {
     this._router.navigate(["user"]);
   }
 
-  navigateToAddNewTopic(){
+  navigateToAddNewTopic() {
     this._router.navigate(["addTopic"]);
+  }
+
+  async addComment() {
+    if (this.commentText.length > 5) {
+      await this.forumDataService.addComment(this.catId, this.topicId, this.commentText);
+      this.commentText = "";
+    }
   }
 }

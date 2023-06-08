@@ -66,10 +66,10 @@
         <div class="col-sm-12" style="padding-top:10px;">
             <div class="form-group" style="margin: 1.5% 5% 0 5%">
                 <label for="comment">Leave a comment...</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <textarea class="form-control" rows="5" id="comment" [(ngModel)]="commentText"></textarea>
             </div>        </div> 
         <div class="col-sm-12" style="padding-top:10px;">
-            <button type="button" class="btn btn-primary">Add comment</button>
+            <button (click)="addComment()" type="button" class="btn btn-primary">Add comment</button>
         </div>  
 
       </div>

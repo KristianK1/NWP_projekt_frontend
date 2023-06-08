@@ -47,7 +47,11 @@ export class ForumDataService {
   }
 
   async addComment(categoryId: number, topicId: number, text: string) {
+    try{
+      this.onlineService.addComment(this.storageService.getAuthToken(), categoryId, topicId, text);
+    }catch{
 
+    }
   }
 
   async getComments(categoryId: number, topicId: number) {
