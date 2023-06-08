@@ -31,7 +31,6 @@ export class MainComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.loginByToken();
     this.categories = await this.forumDataService.getCategories(false);
     this.selectCategory(this.categories[0].id);
   }

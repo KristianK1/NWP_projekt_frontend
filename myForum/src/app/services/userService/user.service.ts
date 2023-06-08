@@ -67,14 +67,15 @@ export class UserService {
     return false;
   }
 
-  async changePassword(oldP: string, newP: string, logoutOther: boolean) {
-    if (!this.myself.value) return;
+  async changePassword(oldP: string, newP: string, logoutOther: boolean): Promise<boolean> {
+    if (!this.myself.value) return false;
     try {
       await this.onlineService.changePassword(this.myself.value.userId, oldP, newP, logoutOther, this.myself.value.token);
+      console.log("return true");
       return true;
     } catch {
-      return false;
     }
+    return false;
   }
 
   async addEmail(email: string) {

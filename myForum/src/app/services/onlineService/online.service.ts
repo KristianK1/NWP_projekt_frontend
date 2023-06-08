@@ -65,7 +65,9 @@ export class OnlineService {
       logoutOtherSessions: logoutOther,
       dontLogoutToken: dontlogoutToken,
     }
-    let result = await this.https.post(link, body).toPromise();
+    console.log("prije senda");
+    await this.https.post(link, body).toPromise();
+    console.log("nakon senda: ");
   }
 
   async deleteUser(token: string) {

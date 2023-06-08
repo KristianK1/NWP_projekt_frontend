@@ -22,6 +22,7 @@ export class ChangePasswordComponent {
   async changePassword(){
     if(this.newPassword === this.newPasswordAgain){
       let rez = await this.userService.changePassword(this.oldPassword, this.newPassword, this.logoutOthers)
+      console.log(rez);
       if(rez){
         this._router.navigate(["user"]);
       }

@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^16.0.4",
     "@angular/router": "^16.0.4",
     "angular-web-storage": "^15.0.0",
+    "firebase": "^9.22.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "webpack": "^5.85.1",
