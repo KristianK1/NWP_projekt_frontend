@@ -28,10 +28,10 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-              <li *ngIf="loggedIn"><a><span class="glyphicon glyphicon-log-in" (click)="logout()"></span> Logout</a></li>
-              <li *ngIf="loggedIn"><a><span class="glyphicon glyphicon-wrench" (click)="navigateToUserSettings()"></span> User settings</a></li>
-              <li *ngIf="loggedIn"><a><span class="glyphicon glyphicon-plus-sign" (click)="navigateToAddNewTopic()"></span> Add topic</a></li>
-              <li *ngIf="!loggedIn"><a><span class="glyphicon glyphicon-log-in" (click)="navigateToLogin()"></span> Login</a></li>
+              <li *ngIf="loggedIn" (click)="logout()"><a><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+              <li *ngIf="loggedIn" (click)="navigateToUserSettings()"><a><span class="glyphicon glyphicon-wrench"></span> User settings</a></li>
+              <li *ngIf="loggedIn" (click)="navigateToAddNewTopic()"><a><span class="glyphicon glyphicon-plus-sign" ></span> Add topic</a></li>
+              <li *ngIf="!loggedIn" (click)="navigateToLogin()"><a><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
           </div>
         </div>
@@ -65,7 +65,7 @@
       <div class="container-fluid  text-center" style="border-radius:5px;  margin-bottom:5px;" >
         <div class="col-sm-12" style="padding-top:10px;">
             <div class="form-group" style="margin: 1.5% 5% 0 5%">
-                <label for="comment">Leave a comment...</label>
+                <label for="comment">Leave a comment...</label> <p *ngIf="commentText.length > 0 && commentText.length < 5" style="color:red">Komentar mora imati barem 5 znakova</p>
                 <textarea class="form-control" rows="5" id="comment" [(ngModel)]="commentText"></textarea>
             </div>        </div> 
         <div class="col-sm-12" style="padding-top:10px;">

@@ -72,12 +72,13 @@ export class TopicComponent implements OnInit, OnDestroy {
   }
 
   async addComment() {
-    if (this.commentText.length > 5) {
-      await this.forumDataService.addComment(this.catId, this.topicId, this.commentText);
-      this.commentText = "";
-      setTimeout(async () => {
-        this.comments = await this.forumDataService.getComments(this.catId, this.topicId);
-      }, 500);
-    }
+    if (this.commentText.length < 5) return;
+
+    await this.forumDataService.addComment(this.catId, this.topicId, this.commentText);
+    this.commentText = "";
+    setTimeout(async () => {
+      this.comments = await this.forumDataService.getComments(this.catId, this.topicId);
+    }, 500);
+
   }
 }
