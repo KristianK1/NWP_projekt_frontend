@@ -12,6 +12,7 @@ import { UserService } from 'app/services/userService/user.service';
 export class MainComponent implements OnInit {
 
   loggedIn = false;
+  userId: number = -1;
 
   categories: ICategory[] = [];
   selectedCategory = 0;
@@ -26,6 +27,7 @@ export class MainComponent implements OnInit {
     this.userService.myself.subscribe((value) => {
       console.log("eeeeeee" + value)
       this.loggedIn = !!value;
+      this.userId = value?.userId || -1;
     });
 
   }

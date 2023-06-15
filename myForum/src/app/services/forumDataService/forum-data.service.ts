@@ -13,7 +13,7 @@ export class ForumDataService {
   selectedCategory: number = -1;
   selectedTopic: number = -1;
 
-  localTopicsbyCategories:any = [];
+  localTopicsbyCategories: any = [];
 
   constructor(
     private storageService: StorageService,
@@ -47,9 +47,9 @@ export class ForumDataService {
   }
 
   async addComment(categoryId: number, topicId: number, text: string) {
-    try{
+    try {
       this.onlineService.addComment(this.storageService.getAuthToken(), categoryId, topicId, text);
-    }catch{
+    } catch {
 
     }
   }
@@ -64,18 +64,25 @@ export class ForumDataService {
 
   getLocalTopic(catId: number, topicId: number) {
     let topics = this.localTopicsbyCategories[catId] as ITopic[];
-    if(!topics) return undefined;
+    if (!topics) return undefined;
     let topic = topics.find(o => o.id == topicId);
     return topic;
   }
 
-  getLocalCategory(catId: number){
+  getLocalCategory(catId: number) {
     let topics = this.localTopicsbyCategories[catId] as ITopic[];
     return topics;
   }
 
-  async getSingleTopic(catId: number, topicId: number): Promise<ITopic>{
+  async getSingleTopic(catId: number, topicId: number): Promise<ITopic> {
     return await this.onlineService.getSingleTopic(catId, topicId);
   }
 
+  async deleteComment(categoryId: number, topicId: number, commentId: number) {
+    try {
+      return await this.onlineService.deleteComment(this.storageService.getAuthToken(), categoryId, topicId, commentId);
+    } catch {
+
+    }
+  }
 }

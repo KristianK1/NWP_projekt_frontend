@@ -12,6 +12,8 @@ import { UserService } from 'app/services/userService/user.service';
 export class TopicComponent implements OnInit, OnDestroy {
 
   loggedIn = false;
+  userId: number = -2;
+  topicOwnerUserId = -2;
 
   private catId: number = -1;
   private topicId: number = -1;
@@ -31,6 +33,7 @@ export class TopicComponent implements OnInit, OnDestroy {
     this.userService.myself.subscribe((value) => {
       console.log("eeeeeee" + value)
       this.loggedIn = !!value;
+      this.userId = value?.userId || -2;
     });
   }
 
@@ -47,7 +50,7 @@ export class TopicComponent implements OnInit, OnDestroy {
       };
       this.topicText = topicData.text;
       this.topicTitle = topicData.title;
-
+      this.topicOwnerUserId = topicData.userId;
     })
   }
 
@@ -79,6 +82,13 @@ export class TopicComponent implements OnInit, OnDestroy {
     setTimeout(async () => {
       this.comments = await this.forumDataService.getComments(this.catId, this.topicId);
     }, 500);
-
   }
+
+  async deleteComment(commentId: number) {
+    await this.forumDataService.deleteComment(this.catId, this.topicId, commentId);
+    setTimeout(async () => {
+      this.comments = await this.forumDataService.getComments(this.catId, this.topicId);
+    }, 500);
+  }
+
 }

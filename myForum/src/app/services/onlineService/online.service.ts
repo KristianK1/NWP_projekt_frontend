@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAddCommentRequest, IAddEmailRequest, IAddTopicRequest, IChangePasswordRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
+import { IAddCommentRequest, IAddEmailRequest, IAddTopicRequest, IChangePasswordRequest, IDeleteCommentRequest, IDeleteUserRequest, ILoginByTokenRequest, ILoginRequest, ILoginResponse, ILogoutRequest, IRegisterRequest } from 'app/models/backendRequests';
 import { ICategory, IComment, ITopic } from 'app/models/forumModels';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OnlineService {
-  // backendLink = "http://localhost:8001";
-  backendLink = "https://myforum-pv1g.onrender.com";
+  backendLink = "http://localhost:8001";
+  // backendLink = "https://myforum-pv1g.onrender.com";
   mainAPIrouter = "/API";
   userAuthRouter = "/userAuth";
   forumDataRouter = "/forumData";
+  deleteCommentRouter = '/deleteComment'
 
   constructor(
     private https: HttpClient,
@@ -129,5 +130,16 @@ export class OnlineService {
       text: comment,
     };
     return await this.https.post(link, request).toPromise() as ITopic;
+  }
+
+  async deleteComment(token: string, categoryId: number, topicId: number, commentId: number) {
+    let link = `${this.backendLink}${this.mainAPIrouter}${this.forumDataRouter}${this.deleteCommentRouter}`;
+    let request: IDeleteCommentRequest = {
+      authToken: token,
+      categoryId: categoryId,
+      topicId: topicId,
+      commentId: commentId,
+    }
+    await this.https.post(link, request).toPromise();
   }
 }

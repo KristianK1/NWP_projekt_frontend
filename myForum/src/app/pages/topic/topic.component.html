@@ -50,8 +50,8 @@
         <div class="col-sm-6" style="padding-top:10px;">
                 <span class="topicauthor"><b>{{comment.username}}</b></span>, <span class="topicdatetime">{{comment.timestamp}}</span>
         </div>  
-        <div class="col-sm-6" style="padding-top:10px; ">
-            <i class="fa fa-trash" aria-hidden="true" style="font-size:20px;" onclick=""></i>
+        <div *ngIf="comment.userId==userId || topicOwnerUserId == userId" class="col-sm-6" style="padding-top:10px;">
+            <i class="fa fa-trash" aria-hidden="true" style="font-size:20px;" (click)="deleteComment(comment.id)"></i>
         </div> 
         <hr class="hline">
         <div class="col-sm-12" style="padding-top:10px;">
