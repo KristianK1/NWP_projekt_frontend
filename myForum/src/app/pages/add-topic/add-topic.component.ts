@@ -47,7 +47,7 @@ export class AddTopicComponent implements OnInit {
     }
     await this.forumDataService.addTopic(cat.id, this.title, this.desc);
     await this.forumDataService.getCategories(true);
-    this._router.navigate(["main"]);
+    this._router.navigate([""]);
     
   }
 

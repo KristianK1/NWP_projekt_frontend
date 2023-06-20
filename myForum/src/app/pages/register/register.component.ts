@@ -37,6 +37,6 @@ export class RegisterComponent implements OnInit {
   }
 
   navigateToMainScreen(){
-    this._router.navigate(['main']);
+    this._router.navigate(['']);
   }
 }

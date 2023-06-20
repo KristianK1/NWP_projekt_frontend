@@ -27,6 +27,7 @@ export class ForumDataService {
         return this.categories;
       } catch { }
     }
+    
     return this.categories;
   }
 
@@ -40,6 +41,9 @@ export class ForumDataService {
     try {
       let topics = await this.onlineService.getTopics(categoryId);
       this.localTopicsbyCategories[categoryId] = topics;
+      for(let topic of topics) {
+        topic.timestamp = this.formatTimestamp(topic.timestamp);
+      }
       return topics;
     } catch {
       return [];
@@ -56,7 +60,11 @@ export class ForumDataService {
 
   async getComments(categoryId: number, topicId: number) {
     try {
-      return await this.onlineService.getComments(categoryId, topicId);
+      let x = await this.onlineService.getComments(categoryId, topicId);
+      for(let comment of x){
+        comment.timestamp = this.formatTimestamp(comment.timestamp);
+      }
+      return x;
     } catch {
       return [];
     }
@@ -85,4 +93,19 @@ export class ForumDataService {
 
     }
   }
+
+  formatTimestamp(isoTimestamp: string): string {
+    const date = new Date(isoTimestamp);
+    
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Mjeseci su indeksirani od 0, stoga dodajemo +1
+    const year = date.getFullYear().toString();
+    
+    const formattedTimestamp = `${hours}:${minutes} ${day}/${month}/${year}`;
+    
+    return formattedTimestamp;
+  }
+
 }

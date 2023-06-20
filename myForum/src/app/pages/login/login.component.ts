@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToMainScreen(){
-    this._router.navigate(['main']);
+    this._router.navigate(['']);
   }
 
   navigateToRegister(){

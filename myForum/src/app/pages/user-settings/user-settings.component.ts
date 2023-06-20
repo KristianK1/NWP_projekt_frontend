@@ -19,12 +19,12 @@ export class UserSettingsComponent implements OnInit {
 
   async logout() {
     await this.userService.logout(false);
-    this._router.navigate(["main"]);
+    this._router.navigate([""]);
   }
 
   async logoutAllSessions() {
     await this.userService.logout(true);
-    this._router.navigate(["main"]);
+    this._router.navigate([""]);
   }
 
   chPass() {

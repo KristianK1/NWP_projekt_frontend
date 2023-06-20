@@ -17,10 +17,9 @@ import { AddTopicComponent } from './pages/add-topic/add-topic.component';
 import { FormsModule } from '@angular/forms';
 
 const appRoute: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'main', component: MainComponent },
+  { path: '', component: MainComponent },
   { path: 'topic', component: TopicComponent },
   { path: 'addTopic', component: AddTopicComponent },
   { path: 'user', component: UserSettingsComponent },
